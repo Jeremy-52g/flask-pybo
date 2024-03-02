@@ -26,10 +26,6 @@ def create_app():
     app = Flask(__name__)
     app.config.from_envvar("APP_CONFIG_FILE")
     #app.config.from_object(config)
-    # markdown
-    Markdown(app, extensions=['nl2br', 'fenced_code'])
-    # 오류페이지
-    app.register_error_handler(404, page_not_found)
 
     # ORM
     db.init_app(app)
@@ -50,6 +46,11 @@ def create_app():
     # 필터
     from .filter import format_datetime
     app.jinja_env.filters['datetime'] = format_datetime
+
+    # markdown
+    Markdown(app, extensions=['nl2br', 'fenced_code'])
+    # 오류페이지
+    app.register_error_handler(404, page_not_found)
 
     return app
 
