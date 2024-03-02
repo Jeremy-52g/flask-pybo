@@ -29,7 +29,7 @@ def create_app():
     # markdown
     Markdown(app, extensions=['nl2br', 'fenced_code'])
     # 오류페이지
-    app.register_error_handler(404, page_not_found)w
+    app.register_error_handler(404, page_not_found)
 
     # ORM
     db.init_app(app)
