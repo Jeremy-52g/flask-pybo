@@ -2,6 +2,16 @@ from logging.config import dictConfig
 
 from config.default import *
 
+from dotenv import load_dotenv
+
+load_dotenv(os.path.join(BASE_DIR, '.env'))
+
+SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://{user}:{pw}@{url}/{db}'.format(
+    user=os.getenv('DB_USER'),
+    pw=os.getenv('DB_PASSWORD'),
+    url=os.getenv('DB_HOST'),
+    db=os.getenv('DB_NAME'))
+
 SQLALCHEMY_DATABASE_URI = 'sqlite:///{}'.format(os.path.join(BASE_DIR, 'pybo.db'))
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 SECRET_KEY = b'\x83\xa5U\xd7%\xad\xd3\x8e8H\xac\xe7\x01\xc9C\x95'
